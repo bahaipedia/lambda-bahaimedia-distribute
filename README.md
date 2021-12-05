@@ -6,3 +6,5 @@ In the case of a 'move' action files will not automatically be replicated and a 
 for file moves and initiates a sync action with the US bucket. Less frequently, the US bucket will sync with all overseas buckets
 so eventually this file that was moved will be everywhere. We don't need it to be everywhere immediately because of 
 lambda-edge-file-redirect.
+
+Note that each region where an origin bucket exists will also have a local copy of this lambda function and lambda-bahaimedia-delete-s3
