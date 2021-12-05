@@ -14,9 +14,9 @@ s3 buckets have event notifications tied to Amazon SNS which goes like this:
   2. SNS topic has 1 subscription per region where files are going to be copied whose endpoint is this function or lambda-bahaimedia-delete-s3
 
 Eg, on the US server in an SNS subscription for the distribute function, the endpoints are:
-  Region 1 distribute lambda
-  Region 2 distribute lambda
-  Region 3 distribute lambda
+  1. Region 1 distribute lambda
+  2. Region 2 distribute lambda
+  3. Region 3 distribute lambda  
   
 We avoid an infinite loop of files being copied because this function is triggered only on 'upload' and not on 'copy' actions, the original
 bucket sees an upload action but all other buckets when receiving the file see it as a copy/receipt action and the function is not 
