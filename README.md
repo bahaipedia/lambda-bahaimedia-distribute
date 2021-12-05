@@ -1,4 +1,4 @@
-# lambda-bahaimedia-distribute
+# lambda-bahaimedia-distribute-s3
 Distribute files to regional s3 buckets after getting an upload in any one bucket
 
 This function copies files uploaded in one s3 region to all other s3 regions. It captures and replicates the 'upload' action. 
