@@ -21,6 +21,4 @@ Eg, on the US server in an SNS subscription for the distribute function, the end
 We avoid an infinite loop of files being copied because this function is triggered only on 'upload' and not on 'copy' actions, the original
 bucket sees an upload action but all other buckets when receiving the file see it as a copy/receipt action and the function is not 
 triggered in a loop. This also creates the need to especially watch for and somewhat manually replicate files that are moved by
-mediawiki since that replicates the copy action and those files would not be distributed by this function. See lambda-edge-file-redirect
-for how we deal with this.
-  
+mediawiki since that replicates the copy action and those files would not be distributed by this function. See also lambda-edge-file-redirect.
