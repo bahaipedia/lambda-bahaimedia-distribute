@@ -9,7 +9,12 @@ def lambda_handler(event, context):
     sns_message = ast.literal_eval(event['Records'][0]['Sns']['Message'])
     target_bucket = context.function_name
     source_bucket = str(sns_message['Records'][0]['s3']['bucket']['name'])
-    key = str(urllib.unquote_plus(sns_message['Records'][0]['s3']['object']['key']).decode('utf8'))
-    copy_source = {'Bucket':source_bucket, 'Key':key}
-    print "Copying %s from bucket %s to bucket %s ..." % (key, source_bucket, target_bucket)
-    s3.copy_object(Bucket=target_bucket, Key=key, CopySource=copy_source)
+    key = str(urllib.parse.unquote_plus(sns_message['Records'][0]['s3']['object']['key']))
+    copy_source = {'Bucket': source_bucket, 'Key': key}
+    print(f"Copying {key} from bucket {source_bucket} to bucket {target_bucket}...")
+    try:
+        s3.copy_object(Bucket=target_bucket, Key=key, CopySource=copy_source)
+    except Exception as e:
+        print(f'[Error] Copying {key} failed: {e}')
+    else:
+        print(f'[OK] Copied the {key} key successfully')
